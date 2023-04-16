@@ -9,17 +9,14 @@
         <parameter name="platform" value="Window"/>
         <classes >
             <class name="homepage.SwitchWindowTest"></class>
-<!--            <class name="homepage.ButtonsTest"></class>-->
-<!--            <class name="autoItTests.UploadFileTest"></class>-->
         </classes>
     </test>
 
-<!--    <test name="Run on FIREFOX">-->
-<!--        <parameter name="browserName" value="firefox"/>-->
-<!--        <parameter name="platform" value="Window"/>-->
-<!--        <classes >-->
-<!--            <class name="homepage.SwitchWindowTest"></class>-->
-<!--            <class name="homepage.ButtonsTest"></class>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="Run on FIREFOX">
+        <parameter name="browserName" value="firefox"/>
+        <parameter name="platform" value="Window"/>
+        <classes >
+            <class name="homepage.SwitchWindowTest"></class>
+        </classes>
+    </test>
 </suite>
