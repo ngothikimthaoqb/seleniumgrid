@@ -5,11 +5,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
-import pageObjects.homepage.HomePageObject;
+import pages.HomePage;
 
 public class BaseTest {
     protected  WebDriver driver = null;
-    protected HomePageObject homePage;
+    protected HomePage homePage;
     protected Logger logger;
 
     protected BaseTest() {
@@ -21,10 +21,9 @@ public class BaseTest {
     @BeforeClass
     public void setUp(String pageUrl, String browserName, String platform) {
         logger.info("Page Url: " + pageUrl + " with browser name: " + browserName);
-        System.out.println(platform +"platform");
         driver = driverConfig.getDriver(browserName, platform);
         driver.get(pageUrl);
-        homePage = new HomePageObject(driver);
+        homePage = new HomePage(driver);
     }
 
     @AfterSuite(alwaysRun = true)

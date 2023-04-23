@@ -23,7 +23,7 @@
     <slf4j.version>2.0.3</slf4j.version>
     <aspectj.version>1.9.9.1</aspectj.version>
     <allure.maven.version>2.12.0</allure.maven.version>
-<!--    <allure-testng-version>2.17.3</allure-testng-version>-->
+    <runfile>src/test/resources/RegressionTest.xml</runfile>
     <allure.version>2.20.1</allure.version>
   </properties>
 
@@ -108,7 +108,6 @@
       <artifactId>aspectjweaver</artifactId>
       <version>${aspectj.version}</version>
     </dependency>
-
   </dependencies>
 
   <build>
@@ -129,7 +128,7 @@
         <version>${maven.surefire.version}</version>
         <configuration>
           <suiteXmlFiles>
-            <file>src/test/resources/runRegressionTest.xml</file>
+            <file>${runfile}</file>
           </suiteXmlFiles>
           <argLine>
             -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"

@@ -99,7 +99,7 @@ public class BasePage {
         driver.switchTo().alert().accept();
     }
 
-    public void hoverToElement(WebDriver driver, By by){
+    public void moveToElement(WebDriver driver, By by){
         Actions action = new Actions(driver);
         action.moveToElement(getElement(driver, by)).perform();
     }
@@ -114,5 +114,19 @@ public class BasePage {
         } catch (InterruptedException e) {
             logger.info("Error in staticWait" + e);
         }
+    }
+
+    public WebElement findAndHighLightElement(WebDriver driver, By by) {
+        WebElement elem = driver.findElement(by);
+        // draw a border around the found element
+        if (driver instanceof JavascriptExecutor) {
+            ((JavascriptExecutor)driver).executeScript("arguments[0].style.border='3px solid red'", elem);
+        }
+        return elem;
+    }
+
+
+    public void clickAndHighLightToElement(WebDriver driver, By by) {
+        findAndHighLightElement(driver, by).click();
     }
 }

@@ -1,36 +1,41 @@
 package homepage;
 
 import commons.BaseTest;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
-import pageObjects.checkbox.CheckboxPageObject;
-import pageObjects.datepicker.DatepickerPageObject;
-import pageObjects.homepage.HomePageObject;
+import pages.HomePage;
+import pages.datepicker.DatepickerPage;
 import utilities.DateAndTimeUtil;
+import utilities.listeners.TestListener;
 
+@Listeners({TestListener.class})
+@Epic("Java mentoring")
+@Feature("HomePage")
 public class DatePickerTest extends BaseTest {
-    private HomePageObject homePage;
-    private DatepickerPageObject datepickerPage;
-    SoftAssert softAssert;
+    private HomePage homePage;
+    private DatepickerPage datepickerPage;
 
     @Parameters({"pageUrl"})
     @BeforeMethod
     public void beforeMethod(String pageUrl) {
-        homePage = new HomePageObject(driver);
-        datepickerPage =  new DatepickerPageObject(driver);
-        softAssert = new SoftAssert();
+        homePage = new HomePage(driver);
+        datepickerPage =  new DatepickerPage(driver);
         driver.get(pageUrl);
     }
 
+    @Description("Test description: DatePicker")
+    @Story("DatePicker")
     @Test()
     public void verifySelectedDatepickerSuccessfully() {
-        homePage.clickToElement(driver, homePage.datepicker);
-        datepickerPage.waitForElementUntilClickable(driver, datepickerPage.datepicker);
-        datepickerPage.clickToElement(driver, datepickerPage.datepicker);
-        datepickerPage.clickToElement(driver, datepickerPage.currentDay);
-        Assert.assertEquals(datepickerPage.getElementValue(driver, datepickerPage.datepicker), DateAndTimeUtil.getCurrentDate());
+        homePage.clickDatepicker();
+        datepickerPage.clickCurrentDate();
+        Assert.assertEquals(datepickerPage.getCurrentDate(), DateAndTimeUtil.getCurrentDate());
     }
 }

@@ -10,22 +10,22 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pageObjects.homepage.HomePageObject;
-import pageObjects.switchWindow.SwitchWindowPageObject;
+import pages.HomePage;
+import pages.switchWindow.SwitchWindowPage;
 import utilities.listeners.TestListener;
 
 @Listeners({TestListener.class})
 @Epic("Java mentoring")
 @Feature("HomePage")
 public class SwitchWindowTest  extends BaseTest {
-    private HomePageObject homePage;
-    private SwitchWindowPageObject switchWindowPage;
+    private HomePage homePage;
+    private SwitchWindowPage switchWindowPage;
 
     @Parameters({"pageUrl"})
     @BeforeMethod
     public void beforeMethod(String pageUrl) {
-        homePage = new HomePageObject(driver);
-        switchWindowPage =  new SwitchWindowPageObject(driver);
+        homePage = new HomePage(driver);
+        switchWindowPage =  new SwitchWindowPage(driver);
         driver.get(pageUrl);
     }
 
@@ -33,8 +33,8 @@ public class SwitchWindowTest  extends BaseTest {
     @Story("Switch Window")
     @Test
     public  void switchToWindowSuccessfully() {
-        homePage.clickToElement(driver, homePage.switchWindow);
-        switchWindowPage.clickToElement(driver, switchWindowPage.newTabButton);
+        homePage.clickSwitchWindow();
+        switchWindowPage.clickNewTabButton();
         switchWindowPage.switchToAnotherBrowser();
         Assert.assertEquals(switchWindowPage.getPageTitle(driver), "Formy");
         Assert.assertEquals("a", "b");
@@ -44,8 +44,8 @@ public class SwitchWindowTest  extends BaseTest {
     @Story("Switch Window")
     @Test
     public  void openAlertSuccessfully() {
-        homePage.clickToElement(driver, homePage.switchWindow);
-        switchWindowPage.clickToElement(driver, switchWindowPage.alertButton);
+        homePage.clickSwitchWindow();
+        switchWindowPage.clickAlertButton();
         if(switchWindowPage.isAlertPresent(driver)) {
             switchWindowPage.acceptAlert(driver);
         }
